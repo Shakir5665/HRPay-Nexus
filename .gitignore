@@ -1,0 +1,35 @@
+# .gitignore
+
+# IDE / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Backend - .NET
+bin/
+obj/
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Frontend - Node/Vite
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
+.env.production
+.eslintcache
+
+# Logs and databases
+*.log
+*.db
+*.sqlite
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini

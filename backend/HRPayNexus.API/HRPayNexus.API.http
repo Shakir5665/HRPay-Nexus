@@ -1,0 +1,6 @@
+@HRPayNexus.API_HostAddress = http://localhost:5101
+
+GET {{HRPayNexus.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
