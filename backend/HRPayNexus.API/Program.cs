@@ -112,20 +112,21 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// THE NUCLEAR CORS OPTION - MUST BE AT THE VERY TOP
+app.UseCors("Default");
+Console.WriteLine(">>> HRPay Nexus API: CORS Policy Initialized <<<");
+
 // Seed Database
 await DbInitializer.Initialize(app.Services);
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment() || true) // Always enable swagger for demo/easy testing
+if (app.Environment.IsDevelopment() || true) 
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
-
-app.UseCors("Default");
-
 app.UseAuthentication();
 app.UseAuthorization();
 
