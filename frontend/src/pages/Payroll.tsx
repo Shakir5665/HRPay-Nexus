@@ -23,7 +23,7 @@ const Payroll: React.FC = () => {
     onConfirm?: () => void;
   }>({ show: false, type: 'alert', title: '', message: '' });
 
-  const { data: payrollHistory, isLoading: isLoadingHistory } = useQuery({
+  const { data: payrollHistory } = useQuery({
     queryKey: ['payroll-history'],
     queryFn: async () => {
       const response = await api.get('/payroll/history');
