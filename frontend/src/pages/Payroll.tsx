@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import api from '../services/api';
-import { CreditCard, Calculator, Info, Calculator as CalcIcon, PlusCircle, CheckCircle } from 'lucide-react';
+import { CreditCard, Info, Calculator as CalcIcon, PlusCircle, CheckCircle } from 'lucide-react';
 
 const Payroll: React.FC = () => {
   const queryClient = useQueryClient();

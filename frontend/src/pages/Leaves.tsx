@@ -147,8 +147,8 @@ const Leaves: React.FC = () => {
                   </td>
                   <td className="px-6 py-4">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${leave.status === 0 ? 'bg-amber-100 text-amber-600 border border-amber-200' :
-                        leave.status === 1 ? 'bg-emerald-100 text-emerald-600 border border-emerald-200' :
-                          'bg-red-100 text-red-600 border border-red-200'
+                      leave.status === 1 ? 'bg-emerald-100 text-emerald-600 border border-emerald-200' :
+                        'bg-red-100 text-red-600 border border-red-200'
                       }`}>
                       {leave.status === 0 ? 'Pending' : leave.status === 1 ? 'Approved' : 'Rejected'}
                     </span>

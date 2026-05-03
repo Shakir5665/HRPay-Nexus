@@ -1,9 +1,9 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import api from '../services/api';
-import { 
-  Users, 
-  CreditCard, 
+import {
+  Users,
+  CreditCard,
   Hourglass,
   Building2,
   LineChart,
@@ -63,28 +63,28 @@ const Dashboard: React.FC = () => {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard 
-          title="Total Employees" 
-          value={stats.totalEmployees} 
-          icon={Users} 
+        <StatCard
+          title="Total Employees"
+          value={stats.totalEmployees}
+          icon={Users}
           color="blue"
         />
-        <StatCard 
-          title="Monthly Payroll" 
-          value={`${stats.totalPayrollThisMonth.toLocaleString()}.00`} 
-          icon={CreditCard} 
+        <StatCard
+          title="Monthly Payroll"
+          value={`${stats.totalPayrollThisMonth.toLocaleString()}.00`}
+          icon={CreditCard}
           color="green"
         />
-        <StatCard 
-          title="Pending Leaves" 
-          value={stats.pendingLeaves} 
-          icon={Hourglass} 
+        <StatCard
+          title="Pending Leaves"
+          value={stats.pendingLeaves}
+          icon={Hourglass}
           color="amber"
         />
-        <StatCard 
-          title="Departments" 
-          value={departments.length} 
-          icon={Building2} 
+        <StatCard
+          title="Departments"
+          value={departments.length}
+          icon={Building2}
           color="sky"
         />
       </div>
@@ -96,7 +96,7 @@ const Dashboard: React.FC = () => {
             <h2 className="text-lg font-bold text-slate-800">Departments Overview</h2>
           </div>
         </div>
-        
+
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>

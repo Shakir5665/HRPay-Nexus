@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Users, 
-  CalendarClock, 
-  CreditCard, 
-  LogOut, 
-  Menu, 
+import {
+  LayoutDashboard,
+  Users,
+  CalendarClock,
+  CreditCard,
+  LogOut,
+  Menu,
   X,
   FileText,
   Shield,
@@ -39,7 +39,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="flex h-screen bg-[#f8fafc] text-slate-900 font-['Inter'] overflow-hidden">
       {/* Sidebar */}
-      <motion.aside 
+      <motion.aside
         initial={false}
         animate={{ width: isSidebarOpen ? 260 : 0, opacity: isSidebarOpen ? 1 : 0 }}
         className={`fixed inset-y-0 left-0 z-50 bg-[#0b1120] flex flex-col lg:relative transition-all duration-300`}
@@ -61,11 +61,10 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`group flex items-center gap-3 px-6 py-3 transition-all duration-200 border-l-4 ${
-                  isActive 
-                    ? 'bg-slate-800/50 text-white border-cyan-500' 
+                className={`group flex items-center gap-3 px-6 py-3 transition-all duration-200 border-l-4 ${isActive
+                    ? 'bg-slate-800/50 text-white border-cyan-500'
                     : 'text-slate-400 border-transparent hover:text-slate-200 hover:bg-white/5'
-                }`}
+                  }`}
               >
                 <item.icon className={`w-4 h-4 ${isActive ? 'text-cyan-400' : ''}`} />
                 <span className="text-sm font-semibold">{item.name}</span>
@@ -80,8 +79,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         {/* Header */}
         <header className="h-16 flex items-center justify-between px-8 bg-[#0b1120] text-white shrink-0">
           <div className="flex items-center gap-3">
-            <button 
-              onClick={() => setIsSidebarOpen(true)} 
+            <button
+              onClick={() => setIsSidebarOpen(true)}
               className={`p-2 bg-white/5 rounded-lg text-slate-400 hover:text-white transition-all ${isSidebarOpen ? 'lg:hidden' : 'flex'}`}
             >
               <Menu className="w-5 h-5" />
@@ -102,7 +101,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <Shield className="w-4 h-4 text-slate-400" />
               </div>
             </div>
-            
+
             <button
               onClick={handleLogout}
               className="px-4 py-1.5 border border-red-500/50 text-red-500 hover:bg-red-500 hover:text-white rounded-full transition-all text-xs font-bold"
