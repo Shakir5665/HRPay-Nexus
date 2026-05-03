@@ -96,14 +96,14 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <div className="flex items-center gap-2 text-xs">
               <span className="text-slate-400">Welcome,</span>
               <span className="font-bold text-cyan-400 uppercase tracking-wider">{user?.role} USER</span>
-              <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center ml-2">
+              <div className="w-8 h-8 rounded-md bg-slate-800 border border-slate-700 flex items-center justify-center ml-2">
                 <Shield className="w-4 h-4 text-slate-400" />
               </div>
             </div>
 
             <button
               onClick={handleLogout}
-              className="px-4 py-1.5 border border-red-500/50 text-red-500 hover:bg-red-500 hover:text-white rounded-full transition-all text-xs font-bold"
+              className="px-4 py-1.5 border border-red-500/50 text-red-500 hover:bg-red-500 hover:text-white rounded-md transition-all text-xs font-bold"
             >
               Terminate Session
             </button>

@@ -7,7 +7,7 @@
 }
 
 :root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light;
@@ -26,15 +26,15 @@ body {
 }
 
 .card {
-  @apply bg-white border border-slate-200 rounded-xl p-6 shadow-sm transition-all duration-300;
+  @apply bg-white border border-slate-200 rounded-lg p-6 shadow-sm transition-all duration-300;
 }
 
 .btn-primary {
-  @apply px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 text-sm;
+  @apply px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-semibold transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 text-sm;
 }
 
 .btn-outline-red {
-  @apply px-4 py-1.5 border border-red-500/50 text-red-500 hover:bg-red-500 hover:text-white rounded-full transition-all text-xs font-bold;
+  @apply px-4 py-1.5 border border-red-500/50 text-red-500 hover:bg-red-500 hover:text-white rounded-md transition-all text-xs font-bold;
 }
 
 /* Custom scrollbar */
@@ -45,11 +45,11 @@ body {
   @apply bg-slate-100;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+  @apply bg-slate-300 rounded hover:bg-slate-400 transition-colors;
 }
 
 /* Animations */
 .hover-scale {
-  @apply transition-transform hover:scale-[1.02] active:scale-[0.98];
+  @apply transition-transform hover:scale-[1.01] active:scale-[0.99];
 }
 

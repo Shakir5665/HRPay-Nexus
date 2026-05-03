@@ -141,14 +141,14 @@ const StatCard = ({ title, value, icon: Icon, color }: any) => {
   };
 
   return (
-    <div className="bg-white border border-slate-100 rounded-2xl p-6 shadow-sm flex items-center justify-between group hover:shadow-md transition-all">
+    <div className="bg-white border border-slate-100 rounded-lg p-6 shadow-sm flex items-center justify-between group hover:shadow-md transition-all">
       <div>
         <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">{title}</p>
         <p className={`text-3xl font-black tracking-tight ${color === 'green' ? 'text-emerald-600' : 'text-slate-900'}`}>
           {value}
         </p>
       </div>
-      <div className={`p-4 rounded-2xl transition-all group-hover:scale-110 ${iconStyles[color]}`}>
+      <div className={`p-4 rounded-lg transition-all group-hover:scale-110 ${iconStyles[color]}`}>
         <Icon className="w-8 h-8 stroke-[1.5]" />
       </div>
     </div>

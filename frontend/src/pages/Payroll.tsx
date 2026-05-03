@@ -116,11 +116,11 @@ const Payroll: React.FC = () => {
                   </div>
 
                   <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-100">
-                    <div className="bg-slate-50 rounded-2xl p-6 text-center">
+                    <div className="bg-slate-50 rounded-lg p-6 text-center">
                       <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Gross Salary</span>
                       <span className="text-2xl font-black text-slate-900 underline decoration-slate-200 underline-offset-8">LKR {calculationResult.grossSalary.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
                     </div>
-                    <div className="bg-emerald-50 rounded-2xl p-6 text-center border border-emerald-100">
+                    <div className="bg-emerald-50 rounded-lg p-6 text-center border border-emerald-100">
                       <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest block mb-1">Net Salary (Take Home)</span>
                       <span className="text-2xl font-black text-emerald-600 underline decoration-emerald-200 underline-offset-8">LKR {calculationResult.netSalary.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
                     </div>
@@ -130,12 +130,12 @@ const Payroll: React.FC = () => {
             </div>
 
             <div className="space-y-6">
-              <div className="bg-white border border-slate-100 rounded-3xl p-8 shadow-sm">
+              <div className="bg-white border border-slate-100 rounded-lg p-8 shadow-sm">
                 <h3 className="font-black text-slate-900 uppercase tracking-wider text-xs mb-6">Actions</h3>
                 <div className="space-y-3">
                   <button 
                     onClick={() => handleDownloadPayslip(calculationResult.id)}
-                    className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-600/10"
+                    className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-600/10"
                   >
                     <PlusCircle className="w-4 h-4 rotate-45" /> Generate Payslip PDF
                   </button>

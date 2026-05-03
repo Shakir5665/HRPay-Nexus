@@ -72,21 +72,21 @@ const Employees: React.FC = () => {
         </div>
         <button 
           onClick={() => setShowAddModal(true)}
-          className="px-6 py-2.5 bg-[#0b1120] hover:bg-slate-800 text-white rounded-full font-bold transition-all flex items-center gap-2 text-sm shadow-lg shadow-slate-900/20 active:scale-95"
+          className="px-6 py-2.5 bg-[#0b1120] hover:bg-slate-800 text-white rounded-md font-bold transition-all flex items-center gap-2 text-sm shadow-lg shadow-slate-900/20 active:scale-95"
         >
           <UserPlus className="w-4 h-4" />
           Onboard Employee
         </button>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm flex flex-col">
+      <div className="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm flex flex-col">
         <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
           <div className="flex-1 max-w-md hidden md:block" />
           <div className="relative">
             <input 
               type="text" 
               placeholder="Search ecosystem..." 
-              className="bg-white border border-slate-200 rounded-full px-5 py-2 text-xs w-64 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              className="bg-white border border-slate-200 rounded-lg px-5 py-2 text-xs w-64 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -166,7 +166,8 @@ const Employees: React.FC = () => {
           <span>Showing 1 to {filteredEmployees?.length || 0} of {filteredEmployees?.length || 0} entries</span>
           <div className="flex items-center gap-2">
             <button className="px-3 py-1.5 border border-slate-200 rounded-md hover:bg-white transition-colors disabled:opacity-50" disabled>Prev</button>
-            <button className="px-3 py-1.5 border border-slate-200 rounded-md hover:bg-white transition-colors disabled:opacity-50" disabled>Next</button>
+            <button className="px-3 py-1.5 border border-slate-200 rounded-lg hover:bg-white transition-colors disabled:opacity-50" disabled>Prev</button>
+            <button className="px-3 py-1.5 border border-slate-200 rounded-lg hover:bg-white transition-colors disabled:opacity-50" disabled>Next</button>
           </div>
         </div>
       </div>
@@ -175,14 +176,14 @@ const Employees: React.FC = () => {
 
       {modal.show && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md">
-          <div className="w-full max-w-sm bg-white border border-slate-200 rounded-[2rem] shadow-2xl overflow-hidden p-8 text-center space-y-4">
+          <div className="w-full max-w-sm bg-white border border-slate-200 rounded-lg shadow-2xl overflow-hidden p-8 text-center space-y-4">
             <h3 className="text-xl font-black text-slate-900 tracking-tight">{modal.title}</h3>
             <p className="text-slate-500 text-sm font-medium mt-2 leading-relaxed">{modal.message}</p>
             <div className="pt-4 flex gap-3">
               {modal.type === 'confirm' && (
                 <button 
                   onClick={() => setModal({ ...modal, show: false })}
-                  className="flex-1 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full font-bold transition-all text-sm"
+                  className="flex-1 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg font-bold transition-all text-sm"
                 >
                   Cancel
                 </button>
@@ -192,7 +193,7 @@ const Employees: React.FC = () => {
                   if (modal.type === 'confirm' && modal.onConfirm) modal.onConfirm();
                   setModal({ ...modal, show: false });
                 }}
-                className={`flex-1 px-6 py-3 text-white rounded-full font-bold shadow-lg transition-all text-sm ${modal.type === 'confirm' ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-600 hover:bg-blue-700'}`}
+                className={`flex-1 px-6 py-3 text-white rounded-lg font-bold shadow-lg transition-all text-sm ${modal.type === 'confirm' ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-600 hover:bg-blue-700'}`}
               >
                 {modal.type === 'confirm' ? 'Delete' : 'Continue'}
               </button>

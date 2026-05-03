@@ -40,17 +40,17 @@ const Login: React.FC = () => {
             HR-Pay <span className="text-cyan-400">Nexus</span>
           </span>
         </div>
-        <button className="px-6 py-1.5 border border-cyan-400/50 text-cyan-400 text-xs font-bold rounded-full hover:bg-cyan-400 hover:text-slate-900 transition-all uppercase tracking-widest">
+        <button className="px-6 py-1.5 border border-cyan-400/50 text-cyan-400 text-xs font-bold rounded-md hover:bg-cyan-400 hover:text-slate-900 transition-all uppercase tracking-widest">
           Login Portal
         </button>
       </header>
 
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col items-center justify-center p-6 relative">
-        <div className="w-full max-w-[480px] bg-white rounded-[1.5rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden border border-slate-100">
+        <div className="w-full max-w-[480px] bg-white rounded-lg shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden border border-slate-100">
           {/* Card Top: Dark Section */}
           <div className="bg-[#1e293b] p-10 flex flex-col items-center justify-center text-center space-y-4">
-            <div className="w-16 h-16 bg-[#1e293b] border-2 border-cyan-400 rounded-2xl flex items-center justify-center text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+            <div className="w-16 h-16 bg-[#1e293b] border-2 border-cyan-400 rounded-lg flex items-center justify-center text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
               <Shield className="w-8 h-8 fill-cyan-400/10" />
             </div>
             <h1 className="text-3xl font-black text-white tracking-tight">HRPay Nexus</h1>
@@ -83,7 +83,7 @@ const Login: React.FC = () => {
                     type="email"
                     required
                     placeholder="admin@test.com"
-                    className="block w-full px-4 pt-8 pb-3 bg-[#f0f4ff] border border-transparent rounded-xl text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/20 focus:border-cyan-400 transition-all"
+                    className="block w-full px-4 pt-8 pb-3 bg-[#f0f4ff] border border-transparent rounded-lg text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/20 focus:border-cyan-400 transition-all"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -98,7 +98,7 @@ const Login: React.FC = () => {
                     type="password"
                     required
                     placeholder="••••••••"
-                    className="block w-full px-4 pt-8 pb-3 bg-[#f0f4ff] border border-transparent rounded-xl text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/20 focus:border-cyan-400 transition-all"
+                    className="block w-full px-4 pt-8 pb-3 bg-[#f0f4ff] border border-transparent rounded-lg text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/20 focus:border-cyan-400 transition-all"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -109,7 +109,7 @@ const Login: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 bg-cyan-400 hover:bg-cyan-300 disabled:bg-slate-200 disabled:cursor-not-allowed text-slate-900 font-black rounded-full shadow-[0_10px_25px_-5px_rgba(34,211,238,0.4)] transition-all flex items-center justify-center gap-3 group active:scale-95 mt-4"
+                className="w-full py-4 bg-cyan-400 hover:bg-cyan-300 disabled:bg-slate-200 disabled:cursor-not-allowed text-slate-900 font-black rounded-md shadow-[0_10px_25px_-5px_rgba(34,211,238,0.4)] transition-all flex items-center justify-center gap-3 group active:scale-95 mt-4"
               >
                 {isLoading ? (
                   <Loader2 className="w-6 h-6 animate-spin" />
