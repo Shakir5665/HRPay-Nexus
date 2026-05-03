@@ -85,17 +85,27 @@ builder.Services.AddCors(options =>
         
         if (allowedOrigins != null && allowedOrigins.Length > 0)
         {
-            policy.WithOrigins(allowedOrigins)
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
+            if (allowedOrigins.Contains("*"))
+            {
+                policy.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }
+            else
+            {
+                policy.WithOrigins(allowedOrigins)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }
         }
         else
         {
-            policy.AllowAnyOrigin()
+            // Fully lenient fallback for development/troubleshooting
+            policy.SetIsOriginAllowed(origin => true)
                 .AllowAnyMethod()
-                .AllowAnyHeader();
-            // Note: AllowCredentials cannot be used with AllowAnyOrigin
+                .AllowAnyHeader()
+                .AllowCredentials();
         }
     });
 });
