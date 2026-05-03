@@ -5,14 +5,13 @@ import {
   Users,
   CalendarClock,
   CreditCard,
-  LogOut,
   Menu,
   X,
   FileText,
   Shield,
   Cpu
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useAuthStore } from '../store/authStore';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

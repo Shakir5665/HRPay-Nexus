@@ -9,7 +9,6 @@ import {
   LineChart,
   User
 } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const Dashboard: React.FC = () => {
   const { data: stats, isLoading, isError } = useQuery({
