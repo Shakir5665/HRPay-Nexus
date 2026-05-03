@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CreditCard, Lock, Mail, Loader2, AlertCircle, ChevronRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Shield, LogIn, Cpu, Loader2, AlertCircle } from 'lucide-react';
 import api from '../services/api';
 import { useAuthStore } from '../store/authStore';
 
@@ -25,129 +24,111 @@ const Login: React.FC = () => {
       setAuth(user, accessToken, refreshToken);
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data || 'Invalid email or password. Please try again.');
+      setError(err.response?.data || 'Invalid email or password.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-[#020617] relative overflow-hidden font-['Outfit']">
-      {/* Dynamic Background Elements */}
-      <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-sky-600/10 rounded-full blur-[150px] animate-pulse"></div>
-      <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-indigo-600/10 rounded-full blur-[150px] animate-pulse" style={{ animationDelay: '2s' }}></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03] pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full max-w-[440px] px-6 relative z-10"
-      >
-        <div className="text-center mb-10">
-          <motion.div 
-            initial={{ scale: 0.5, rotate: -10 }}
-            animate={{ scale: 1, rotate: 0 }}
-            transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="inline-flex p-4 bg-gradient-to-tr from-sky-600 to-indigo-600 rounded-2xl shadow-2xl shadow-sky-500/30 mb-6"
-          >
-            <CreditCard className="w-8 h-8 text-white" />
-          </motion.div>
-          <h1 className="text-4xl font-extrabold text-white tracking-tight mb-2">Nexus Portal</h1>
-          <p className="text-slate-400 text-lg font-medium">Elevating HR & Payroll Management</p>
+    <div className="min-h-screen w-full flex flex-col bg-slate-50 font-['Inter']">
+      {/* Dark Header */}
+      <header className="h-16 bg-[#0b1120] flex items-center justify-between px-8 shrink-0 shadow-lg relative z-20">
+        <div className="flex items-center gap-2 text-cyan-400">
+          <Cpu className="w-6 h-6" />
+          <span className="text-xl font-black tracking-tight text-white uppercase italic">
+            HR-Pay <span className="text-cyan-400">Nexus</span>
+          </span>
         </div>
+        <button className="px-6 py-1.5 border border-cyan-400/50 text-cyan-400 text-xs font-bold rounded-full hover:bg-cyan-400 hover:text-slate-900 transition-all uppercase tracking-widest">
+          Login Portal
+        </button>
+      </header>
 
-        <div className="glass rounded-[2.5rem] p-8 shadow-2xl border-white/5 relative overflow-hidden group">
-          {/* Subtle shine effect */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+      {/* Main Content Area */}
+      <main className="flex-1 flex flex-col items-center justify-center p-6 relative">
+        <div className="w-full max-w-[480px] bg-white rounded-[1.5rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden border border-slate-100">
+          {/* Card Top: Dark Section */}
+          <div className="bg-[#1e293b] p-10 flex flex-col items-center justify-center text-center space-y-4">
+            <div className="w-16 h-16 bg-[#1e293b] border-2 border-cyan-400 rounded-2xl flex items-center justify-center text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+              <Shield className="w-8 h-8 fill-cyan-400/10" />
+            </div>
+            <h1 className="text-3xl font-black text-white tracking-tight">HRPay Nexus</h1>
+          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-            <AnimatePresence mode="wait">
+          {/* Card Separator: Cyan Line */}
+          <div className="h-2 bg-cyan-400 shadow-[0_4px_10px_rgba(34,211,238,0.3)]"></div>
+
+          {/* Card Bottom: Form Section */}
+          <div className="p-10 pt-12">
+            <div className="text-center mb-8">
+              <h2 className="text-lg font-bold text-slate-500 uppercase tracking-[0.2em]">Authentication Portal</h2>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
               {error && (
-                <motion.div 
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="bg-red-500/10 border border-red-500/20 p-4 rounded-2xl flex items-center gap-3 text-red-400"
-                >
-                  <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                  <p className="text-sm font-semibold">{error}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <div className="space-y-2">
-              <label className="text-sm font-bold text-slate-300 uppercase tracking-widest ml-1">Identity</label>
-              <div className="relative group/input">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-slate-500 group-focus-within/input:text-sky-500 transition-colors" />
+                <div className="bg-red-50 border border-red-100 p-4 rounded-xl flex items-center gap-3 text-red-600 text-sm font-bold">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  {error}
                 </div>
-                <input
-                  type="email"
-                  required
-                  className="block w-full pl-12 pr-4 py-4 bg-slate-950/50 border border-slate-800 rounded-2xl text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500/50 transition-all duration-300 font-['Inter']"
-                  placeholder="name@company.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex justify-between items-center px-1">
-                <label className="text-sm font-bold text-slate-300 uppercase tracking-widest">Secret Key</label>
-                <button type="button" className="text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors">Forgot?</button>
-              </div>
-              <div className="relative group/input">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-slate-500 group-focus-within/input:text-sky-500 transition-colors" />
-                </div>
-                <input
-                  type="password"
-                  required
-                  className="block w-full pl-12 pr-4 py-4 bg-slate-950/50 border border-slate-800 rounded-2xl text-slate-100 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500/20 focus:border-sky-500/50 transition-all duration-300 font-['Inter']"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-4 px-4 bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 disabled:from-slate-800 disabled:to-slate-900 disabled:cursor-not-allowed text-white font-bold rounded-2xl shadow-xl shadow-sky-600/20 transition-all flex items-center justify-center gap-3 group"
-            >
-              {isLoading ? (
-                <Loader2 className="w-6 h-6 animate-spin" />
-              ) : (
-                <>
-                  Authorize Access
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </>
               )}
-            </motion.button>
-          </form>
+
+              <div className="space-y-4">
+                {/* Email Input */}
+                <div className="relative group">
+                  <div className="absolute top-3 left-4">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Email or Nexus ID</span>
+                  </div>
+                  <input
+                    type="email"
+                    required
+                    placeholder="admin@test.com"
+                    className="block w-full px-4 pt-8 pb-3 bg-[#f0f4ff] border border-transparent rounded-xl text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/20 focus:border-cyan-400 transition-all"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+
+                {/* Password Input */}
+                <div className="relative group">
+                  <div className="absolute top-3 left-4">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Secure Password</span>
+                  </div>
+                  <input
+                    type="password"
+                    required
+                    placeholder="••••••••"
+                    className="block w-full px-4 pt-8 pb-3 bg-[#f0f4ff] border border-transparent rounded-xl text-slate-900 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-cyan-400/20 focus:border-cyan-400 transition-all"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              {/* Authenticate Button */}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full py-4 bg-cyan-400 hover:bg-cyan-300 disabled:bg-slate-200 disabled:cursor-not-allowed text-slate-900 font-black rounded-full shadow-[0_10px_25px_-5px_rgba(34,211,238,0.4)] transition-all flex items-center justify-center gap-3 group active:scale-95 mt-4"
+              >
+                {isLoading ? (
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                ) : (
+                  <>
+                    <LogIn className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <span className="uppercase tracking-[0.1em] text-lg">Authenticate</span>
+                  </>
+                )}
+              </button>
+            </form>
+          </div>
         </div>
 
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="mt-12 text-center"
-        >
-          <p className="text-slate-500 text-sm font-medium flex items-center justify-center gap-2">
-            <span className="w-8 h-[1px] bg-slate-800"></span>
-            Trust the process
-            <span className="w-8 h-[1px] bg-slate-800"></span>
-          </p>
-          <p className="mt-4 text-slate-600 text-xs tracking-tighter uppercase font-bold">
-            © 2024 HR-PAY-NEXUS SYSTEM. SECURED BY NEXUS-SHIELD.
-          </p>
-        </motion.div>
-      </motion.div>
+        {/* Branding Footer */}
+        <footer className="mt-12 text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">
+          Architected by Shakir | HRPAY NEXUS V1.0
+        </footer>
+      </main>
     </div>
   );
 };
