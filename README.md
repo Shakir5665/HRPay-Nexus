@@ -1,5 +1,4 @@
-<div align="center"> 
-  <img src="https://i.imgur.com/J3yU7P9.png" alt="HRPay Nexus Logo" width="120" />
+<div align="center">
   <h1>HRPay Nexus 🚀</h1>
   <p><strong>Next-Generation Enterprise HR & Payroll Ecosystem</strong></p>
   <p>Designed and Developed by <b>Shakir Tech Solutions</b></p>
