@@ -24,7 +24,6 @@ $RECYCLE.BIN/
 _ReSharper.*/
 
 # Sensitive AppSettings
-appsettings.json
 appsettings.Development.json
 appsettings.Local.json
 appsettings.Secret.json
