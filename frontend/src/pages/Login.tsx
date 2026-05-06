@@ -36,7 +36,7 @@ const Login: React.FC = () => {
       <header className="h-16 bg-[#0b1120] flex items-center justify-between px-4 sm:px-8 shrink-0 shadow-lg relative z-20">
         <div className="flex items-center gap-2 text-cyan-400">
           <Cpu className="w-5 h-5 sm:w-6 sm:h-6" />
-          <span className="text-lg sm:text-xl font-black tracking-tight text-white uppercase italic">
+          <span className="text-lg sm:text-xl font-black tracking-tight text-white uppercase">
             HR-Pay <span className="text-cyan-400">Nexus</span>
           </span>
         </div>
