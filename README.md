@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>HRPay Nexus 🚀</h1>
+  <h1>HRPay Nexus</h1>
   <p><strong>Next-Generation Enterprise HR & Payroll Ecosystem</strong></p>
   <p>Designed and Developed by <b>Shakir Tech Solutions</b></p>
 
