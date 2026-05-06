@@ -1,35 +1,73 @@
-# .gitignore
-
-# IDE / Editors
-.vscode/
-.idea/
-*.swp
-*.swo
+# =========================
+# Common / OS
+# =========================
 .DS_Store
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.log
 
-# Backend - .NET
-bin/
-obj/
+# =========================
+# Backend: .NET / C#
+# =========================
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Tt]est[Rr]esult*/
+*.suo
 *.user
 *.userosscache
 *.sln.docstates
 .vs/
+_ReSharper.*/
 
-# Frontend - Node/Vite
+# Sensitive AppSettings
+appsettings.Development.json
+appsettings.Local.json
+appsettings.Secret.json
+
+# =========================
+# Frontend: Node / React / Vite
+# =========================
 node_modules/
 dist/
 dist-ssr/
-*.local
+build/
+coverage/
+
+# Environment Variables
 .env
+.env.local
+.env.*.local
 .env.production
+
+# Node Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Caches
+.npm/
 .eslintcache
+.vite/
 
-# Logs and databases
-*.log
-*.db
-*.sqlite
+# =========================
+# IDEs / Editors
+# =========================
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+*.swp
+*.swo
 
-# OS generated files
-Thumbs.db
-ehthumbs.db
-[Dd]esktop.ini
+# =========================
+# Project Specific
+# =========================
+project_documentations/
+internal_docs/

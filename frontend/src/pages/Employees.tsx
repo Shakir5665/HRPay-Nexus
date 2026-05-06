@@ -68,19 +68,21 @@ const Employees: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div>
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-cyan-500 rounded-lg shadow-lg">
-              <Users2 className="w-5 h-5 text-white" />
+            <div className="p-2.5 bg-cyan-500 rounded-2xl shadow-xl shadow-cyan-500/20">
+              <Users2 className="w-6 h-6 text-white" />
             </div>
-            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Employee Directory</h1>
+            <div>
+                <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Employee Directory</h1>
+                <p className="text-slate-500 font-medium text-xs sm:text-sm">Nexus Human Capital Registry</p>
+            </div>
           </div>
-          <p className="text-slate-500 mt-1 font-medium text-sm">Enterprise Registry</p>
         </div>
         <button 
           onClick={() => setShowAddModal(true)}
-          className="px-6 py-2.5 bg-[#0b1120] hover:bg-slate-800 text-white rounded-md font-bold transition-all flex items-center gap-2 text-sm shadow-lg shadow-slate-900/20 active:scale-95"
+          className="w-full sm:w-auto px-8 py-3 bg-[#0b1120] hover:bg-slate-800 text-white rounded-full font-black text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 shadow-xl shadow-slate-900/20 active:scale-95"
         >
           <UserPlus className="w-4 h-4" />
           Onboard Employee
@@ -88,77 +90,77 @@ const Employees: React.FC = () => {
       </div>
 
       <div className="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-sm flex flex-col">
-        <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
-          <div className="flex-1 max-w-md hidden md:block" />
-          <div className="relative">
+        <div className="p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between bg-slate-50/30 gap-4">
+          <div className="flex items-center gap-2">
+            <Search className="w-4 h-4 text-slate-400" />
             <input 
               type="text" 
-              placeholder="Search ecosystem..." 
-              className="bg-white border border-slate-200 rounded-lg px-5 py-2 text-xs w-64 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              placeholder="Search by name, ID or email..." 
+              className="bg-transparent border-none text-sm w-full sm:w-80 focus:outline-none focus:ring-0 text-slate-600 placeholder:text-slate-400 font-bold"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+          </div>
+          <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest hidden sm:block">
+            {filteredEmployees?.length || 0} Records Synchronized
           </div>
         </div>
         
-        <div className="overflow-x-auto">
+        {/* Desktop View Table */}
+        <div className="hidden lg:block overflow-x-auto">
           <table className="w-full text-left">
             <thead>
               <tr className="bg-white text-slate-400 text-[10px] font-black uppercase tracking-widest border-b border-slate-100">
-                <th className="px-6 py-4">Nexus ID</th>
-                <th className="px-6 py-4">Name</th>
-                <th className="px-6 py-4">Department</th>
-                <th className="px-6 py-4">Corporate Email</th>
-                <th className="px-6 py-4">Basic Salary</th>
-                <th className="px-6 py-4">Status</th>
-                <th className="px-6 py-4">Actions</th>
+                <th className="px-8 py-5">Nexus ID</th>
+                <th className="px-8 py-5">Name</th>
+                <th className="px-8 py-5">Department</th>
+                <th className="px-8 py-5">Corporate Email</th>
+                <th className="px-8 py-5">Basic Salary</th>
+                <th className="px-8 py-5">Status</th>
+                <th className="px-8 py-5 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50">
               {isLoading ? (
-                <tr><td colSpan={7} className="px-6 py-10 text-center text-slate-400 text-sm">Synchronizing directory...</td></tr>
+                <tr><td colSpan={7} className="px-8 py-10 text-center text-slate-400 text-sm font-bold uppercase tracking-widest">Synchronizing directory...</td></tr>
               ) : filteredEmployees?.length === 0 ? (
-                <tr><td colSpan={7} className="px-6 py-10 text-center text-slate-400 text-sm">No employees found in registry.</td></tr>
+                <tr><td colSpan={7} className="px-8 py-10 text-center text-slate-400 text-sm font-bold uppercase tracking-widest">No employees found in registry.</td></tr>
               ) : filteredEmployees?.map((emp: any) => (
-                <tr key={emp.id} className="hover:bg-slate-50/50 transition-colors">
-                  <td className="px-6 py-4 text-xs font-bold text-slate-500 uppercase">
+                <tr key={emp.id} className="hover:bg-slate-50/50 transition-colors group">
+                  <td className="px-8 py-6 text-xs font-black text-slate-500 uppercase tracking-tighter">
                     {emp.employeeCode}
                   </td>
-                  <td className="px-6 py-4 text-sm font-black text-slate-900">
-                    {emp.fullName}
+                  <td className="px-8 py-6">
+                    <span className="text-sm font-black text-slate-900 uppercase tracking-tight">{emp.fullName}</span>
                   </td>
-                  <td className="px-6 py-4 text-xs font-bold text-slate-600 uppercase">
-                    {emp.department}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-medium text-cyan-500 hover:underline cursor-pointer">
-                    {emp.email}
-                  </td>
-                  <td className="px-6 py-4 text-sm font-black text-emerald-600">
-                    {emp.baseSalary.toLocaleString()} LKR
-                  </td>
-                  <td className="px-6 py-4">
-                    <span className="px-3 py-1 bg-emerald-100 text-emerald-600 border border-emerald-200 rounded-full text-[10px] font-bold uppercase tracking-widest">
-                      Active
+                  <td className="px-8 py-6">
+                    <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-lg text-[10px] font-black uppercase tracking-widest border border-slate-200">
+                      {emp.department}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
-                    <div className="flex items-center gap-2">
+                  <td className="px-8 py-6 text-sm font-bold text-cyan-500 hover:underline cursor-pointer tracking-tight">
+                    {emp.email}
+                  </td>
+                  <td className="px-8 py-6 text-sm font-black text-emerald-600 tabular-nums">
+                    {emp.baseSalary.toLocaleString()}.00
+                  </td>
+                  <td className="px-8 py-6 text-right">
+                    <div className="flex items-center justify-end gap-3 transition-all">
                       <button 
                         onClick={() => setShowViewModal(emp)}
-                        className="p-1.5 text-cyan-400 hover:bg-cyan-50 rounded-lg border border-cyan-100 transition-colors"
+                        className="p-2.5 text-cyan-500 hover:bg-cyan-500 hover:text-white rounded-xl border border-cyan-100 transition-all shadow-lg shadow-cyan-500/5 active:scale-95"
                       >
                         <Eye className="w-4 h-4" />
                       </button>
                       <button 
                         onClick={() => setShowEditModal(emp)}
-                        className="p-1.5 text-slate-700 hover:bg-slate-100 rounded-lg border border-slate-200 transition-colors"
+                        className="p-2.5 text-slate-600 hover:bg-slate-900 hover:text-white rounded-xl border border-slate-200 transition-all shadow-lg shadow-slate-900/5 active:scale-95"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
                       <button 
                         onClick={() => handleDelete(emp.id, emp.fullName)}
-                        className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg border border-red-100 transition-colors"
+                        className="p-2.5 text-red-500 hover:bg-red-600 hover:text-white rounded-xl border border-red-100 transition-all shadow-lg shadow-red-500/5 active:scale-95"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -170,12 +172,51 @@ const Employees: React.FC = () => {
           </table>
         </div>
 
-        <div className="px-6 py-4 bg-slate-50/30 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-widest">
-          <span>Showing 1 to {filteredEmployees?.length || 0} of {filteredEmployees?.length || 0} entries</span>
-          <div className="flex items-center gap-2">
-            <button className="px-3 py-1.5 border border-slate-200 rounded-md hover:bg-white transition-colors disabled:opacity-50" disabled>Prev</button>
-            <button className="px-3 py-1.5 border border-slate-200 rounded-lg hover:bg-white transition-colors disabled:opacity-50" disabled>Prev</button>
-            <button className="px-3 py-1.5 border border-slate-200 rounded-lg hover:bg-white transition-colors disabled:opacity-50" disabled>Next</button>
+        {/* Mobile/Tablet Card View */}
+        <div className="lg:hidden divide-y divide-slate-100">
+            {isLoading ? (
+                <div className="p-10 text-center text-slate-400 text-xs font-black uppercase tracking-[0.2em] animate-pulse">Syncing Database Node...</div>
+            ) : filteredEmployees?.length === 0 ? (
+                <div className="p-10 text-center text-slate-400 text-xs font-black uppercase tracking-[0.2em]">Null Registry Output</div>
+            ) : filteredEmployees?.map((emp: any) => (
+                <div key={emp.id} className="p-6 space-y-4 hover:bg-slate-50 transition-colors group">
+                    <div className="flex items-start justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center text-white font-black text-lg shadow-xl shadow-slate-900/20">
+                                {emp.fullName.charAt(0)}
+                            </div>
+                            <div>
+                                <h3 className="text-base font-black text-slate-900 uppercase tracking-tight">{emp.fullName}</h3>
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">{emp.employeeCode}</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <button onClick={() => setShowViewModal(emp)} className="p-2 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-cyan-500 transition-all"><Eye className="w-4 h-4" /></button>
+                            <button onClick={() => setShowEditModal(emp)} className="p-2 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-slate-900 transition-all"><Edit2 className="w-4 h-4" /></button>
+                            <button onClick={() => handleDelete(emp.id, emp.fullName)} className="p-2 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-red-500 transition-all"><Trash2 className="w-4 h-4" /></button>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 pt-2">
+                        <div className="space-y-0.5">
+                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Division</p>
+                            <p className="text-xs font-bold text-slate-700 uppercase tracking-tighter">{emp.department}</p>
+                        </div>
+                        <div className="space-y-0.5 text-right">
+                            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Salary Node</p>
+                            <p className="text-xs font-black text-emerald-600 tabular-nums">{emp.baseSalary.toLocaleString()}</p>
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        <div className="px-6 py-5 bg-slate-50/30 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] text-center sm:text-left">
+            Showing <span className="text-slate-900">{filteredEmployees?.length || 0}</span> Systemic Registry Entries
+          </p>
+          <div className="flex items-center justify-center sm:justify-end gap-2">
+            <button className="px-4 py-2 border border-slate-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-300 cursor-not-allowed bg-white" disabled>Prev</button>
+            <button className="px-4 py-2 border border-slate-200 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-300 cursor-not-allowed bg-white" disabled>Next</button>
           </div>
         </div>
       </div>
@@ -184,14 +225,19 @@ const Employees: React.FC = () => {
 
       {modal.show && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md">
-          <div className="w-full max-w-sm bg-white border border-slate-200 rounded-lg shadow-2xl overflow-hidden p-8 text-center space-y-4">
-            <h3 className="text-xl font-black text-slate-900 tracking-tight">{modal.title}</h3>
-            <p className="text-slate-500 text-sm font-medium mt-2 leading-relaxed">{modal.message}</p>
+          <div className="w-full max-w-sm bg-white border border-slate-200 rounded-[2rem] shadow-2xl overflow-hidden p-10 text-center space-y-6">
+            <div className={`mx-auto w-16 h-16 rounded-3xl flex items-center justify-center ${modal.type === 'alert' ? 'bg-blue-50 text-blue-500' : 'bg-red-50 text-red-500'}`}>
+                {modal.type === 'alert' ? <Users2 className="w-8 h-8" /> : <Trash2 className="w-8 h-8" />}
+            </div>
+            <div>
+                <h3 className="text-xl font-black text-slate-900 tracking-tight">{modal.title}</h3>
+                <p className="text-slate-500 text-sm font-medium mt-2 leading-relaxed">{modal.message}</p>
+            </div>
             <div className="pt-4 flex gap-3">
               {modal.type === 'confirm' && (
                 <button 
                   onClick={() => setModal({ ...modal, show: false })}
-                  className="flex-1 px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg font-bold transition-all text-sm"
+                  className="flex-1 px-6 py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full font-black text-[10px] uppercase tracking-widest transition-all"
                 >
                   Cancel
                 </button>
@@ -201,9 +247,9 @@ const Employees: React.FC = () => {
                   if (modal.type === 'confirm' && modal.onConfirm) modal.onConfirm();
                   setModal({ ...modal, show: false });
                 }}
-                className={`flex-1 px-6 py-3 text-white rounded-lg font-bold shadow-lg transition-all text-sm ${modal.type === 'confirm' ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-600 hover:bg-blue-700'}`}
+                className={`flex-1 px-6 py-4 text-white rounded-full font-black text-[10px] uppercase tracking-widest shadow-lg transition-all ${modal.type === 'confirm' ? 'bg-red-500 hover:bg-red-600 shadow-red-500/20' : 'bg-blue-600 hover:bg-blue-700 shadow-blue-600/20'}`}
               >
-                {modal.type === 'confirm' ? 'Delete' : 'Continue'}
+                {modal.type === 'confirm' ? 'Confirm' : 'Acknowledge'}
               </button>
             </div>
           </div>

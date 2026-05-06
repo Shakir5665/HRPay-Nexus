@@ -24,6 +24,7 @@ public static class DependencyInjection
         services.AddScoped<IJwtProvider, JwtProvider>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         services.AddScoped<IPayslipGenerator, PayslipGenerator>();
+        services.AddScoped<IReportGenerator, ReportGenerator>();
 
         // Redis Caching
         services.AddStackExchangeRedisCache(options =>

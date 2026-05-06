@@ -8,19 +8,21 @@ using Microsoft.EntityFrameworkCore;
 namespace HRPayNexus.API.Controllers;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("api/v1/payroll")]
 [Authorize]
 public class PayrollController : ControllerBase
 {
     private readonly IApplicationDbContext _context;
     private readonly IPayrollService _payrollService;
     private readonly IPayslipGenerator _payslipGenerator;
+    private readonly IReportGenerator _reportGenerator;
 
-    public PayrollController(IApplicationDbContext context, IPayrollService payrollService, IPayslipGenerator payslipGenerator)
+    public PayrollController(IApplicationDbContext context, IPayrollService payrollService, IPayslipGenerator payslipGenerator, IReportGenerator reportGenerator)
     {
         _context = context;
         _payrollService = payrollService;
         _payslipGenerator = payslipGenerator;
+        _reportGenerator = reportGenerator;
     }
 
     [HttpPost("process")]
@@ -202,5 +204,25 @@ public class PayrollController : ControllerBase
 
         var pdfBytes = _payslipGenerator.GeneratePdf(record, record.Employee);
         return File(pdfBytes, "application/pdf", $"Payslip_{record.Employee.EmployeeCode}_{record.Month}_{record.Year}.pdf");
+    }
+
+    [HttpGet("report/{month:int}/{year:int}")]
+    public async Task<IActionResult> DownloadReport(int month, int year)
+    {
+        var userRole = User.FindFirst("role")?.Value ?? User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value;
+        if (userRole != "Finance" && userRole != "Admin")
+        {
+            return Forbid("Only Finance or Admin can access summary reports");
+        }
+
+        var records = await _context.PayrollRecords
+            .Include(p => p.Employee)
+            .Where(p => p.Month == month && p.Year == year)
+            .ToListAsync();
+
+        if (!records.Any()) return NotFound("No payroll data found for this period");
+
+        var pdfBytes = _reportGenerator.GeneratePayrollDigestPdf(records, month, year);
+        return File(pdfBytes, "application/pdf", $"Payroll_Digest_{month}_{year}.pdf");
     }
 }

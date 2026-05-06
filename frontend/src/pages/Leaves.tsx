@@ -70,21 +70,21 @@ const Leaves: React.FC = () => {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div>
           <div className="flex items-center gap-3">
             <div className="p-2.5 bg-blue-600 rounded-2xl shadow-xl shadow-blue-600/20">
               <Calendar className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-black text-slate-900 tracking-tight">Leave Management</h1>
-              <p className="text-slate-500 font-medium text-sm">Real-time systemic tracking of employee absences</p>
+              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Leave Center</h1>
+              <p className="text-slate-500 font-medium text-xs sm:text-sm">Real-time systemic tracking of absences</p>
             </div>
           </div>
         </div>
         <button
           onClick={() => setShowRequestModal(true)}
-          className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-black text-xs uppercase tracking-widest transition-all flex items-center gap-2 shadow-xl shadow-blue-600/25 active:scale-95"
+          className="w-full sm:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-black text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-xl shadow-blue-600/25 active:scale-95"
         >
           <Send className="w-4 h-4" />
           Lodge Request
@@ -92,20 +92,24 @@ const Leaves: React.FC = () => {
       </div>
 
       <div className="bg-white border border-slate-200 rounded-[2.5rem] overflow-hidden shadow-sm flex flex-col">
-        <div className="p-8 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
-          <div className="flex items-center gap-2">
+        <div className="p-6 sm:p-8 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between bg-slate-50/30 gap-4">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
             <Search className="w-4 h-4 text-slate-400" />
             <input
               type="text"
               placeholder="Search by employee or reason..."
-              className="bg-transparent border-none text-sm w-80 focus:outline-none focus:ring-0 text-slate-600 placeholder:text-slate-400 font-medium"
+              className="bg-transparent border-none text-sm w-full sm:w-80 focus:outline-none focus:ring-0 text-slate-600 placeholder:text-slate-400 font-bold"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
+          <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest hidden sm:block">
+            Absence Node Active
+          </div>
         </div>
 
-        <div className="overflow-x-auto">
+        {/* Desktop Table View */}
+        <div className="hidden lg:block overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50/50 text-slate-900 text-[10px] font-black uppercase tracking-widest border-b border-slate-100">
@@ -127,22 +131,20 @@ const Leaves: React.FC = () => {
                 <tr key={leave.id} className="hover:bg-slate-50/80 transition-colors group">
                   <td className="px-8 py-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-black text-xs border border-slate-200">
+                      <div className="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 font-black text-xs border border-slate-200 uppercase">
                         {leave.employeeName.charAt(0)}
                       </div>
-                      <span className="text-sm font-black text-slate-900">{leave.employeeName}</span>
+                      <span className="text-sm font-black text-slate-900 uppercase tracking-tight">{leave.employeeName}</span>
                     </div>
                   </td>
                   <td className="px-6 py-6">
-                    <div className="flex flex-col gap-1">
-                      <span className={`px-3 py-1 w-fit rounded-lg text-[10px] font-black uppercase tracking-wider shadow-sm ${leave.annualLeaveBalance <= 0 ? 'bg-red-50 text-red-600 border border-red-100' : 'bg-blue-50 text-blue-600 border border-blue-100'}`}>
-                        {leave.annualLeaveBalance} Days
-                      </span>
-                    </div>
+                    <span className={`px-3 py-1 w-fit rounded-lg text-[10px] font-black uppercase tracking-wider shadow-sm ${leave.annualLeaveBalance <= 0 ? 'bg-red-50 text-red-600 border border-red-100' : 'bg-blue-50 text-blue-600 border border-blue-100'}`}>
+                      {leave.annualLeaveBalance} Days
+                    </span>
                   </td>
                   <td className="px-6 py-6">
                     <span className="text-xs font-black text-slate-500 uppercase tracking-tighter">
-                      {Math.ceil((new Date(leave.endDate).getTime() - new Date(leave.startDate).getTime()) / (1000 * 3600 * 24)) + 1} Day(s)
+                      {Math.ceil((new Date(leave.endDate).getTime() - new Date(leave.startDate).getTime()) / (1000 * 3600 * 24)) + 1} Days
                     </span>
                   </td>
                   <td className="px-6 py-6">
@@ -152,11 +154,7 @@ const Leaves: React.FC = () => {
                     </div>
                   </td>
                   <td className="px-6 py-6">
-                    <div className="max-w-xs">
-                      <p className="text-sm font-medium text-slate-600 leading-relaxed truncate group-hover:whitespace-normal group-hover:overflow-visible group-hover:break-words">
-                        {leave.reason}
-                      </p>
-                    </div>
+                    <p className="text-sm font-medium text-slate-600 leading-relaxed truncate max-w-[200px]">{leave.reason}</p>
                   </td>
                   <td className="px-6 py-6">
                     <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.15em] shadow-md border-none ${
@@ -168,54 +166,75 @@ const Leaves: React.FC = () => {
                     </span>
                   </td>
                   <td className="px-8 py-6 text-right">
-                    <div className="flex items-center justify-end gap-3 transition-all">
+                    <div className="flex items-center justify-end gap-3">
                       {isManagerOrAdmin && (
                         <>
-                          <button
-                            onClick={() => handleAction(leave.id, 1)}
-                            disabled={leave.status !== 0}
-                            className={`p-2.5 rounded-xl transition-all shadow-lg ${
-                              leave.status === 0 
-                                ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-emerald-600/20 active:scale-95' 
-                                : 'bg-slate-50 text-slate-200 shadow-none cursor-not-allowed opacity-50'
-                            }`}
-                            title={leave.status === 0 ? "Approve Request" : "Decision already made"}
-                          >
-                            <Check className="w-4 h-4 stroke-[3]" />
-                          </button>
-                          <button
-                            onClick={() => handleAction(leave.id, 2)}
-                            disabled={leave.status !== 0}
-                            className={`p-2.5 rounded-xl transition-all shadow-lg ${
-                              leave.status === 0 
-                                ? 'bg-rose-600 text-white hover:bg-rose-700 shadow-rose-600/20 active:scale-95' 
-                                : 'bg-slate-50 text-slate-200 shadow-none cursor-not-allowed opacity-50'
-                            }`}
-                            title={leave.status === 0 ? "Reject Request" : "Decision already made"}
-                          >
-                            <X className="w-4 h-4 stroke-[3]" />
-                          </button>
+                          <button onClick={() => handleAction(leave.id, 1)} disabled={leave.status !== 0} className={`p-2.5 rounded-xl transition-all shadow-lg ${leave.status === 0 ? 'bg-emerald-600 text-white hover:bg-emerald-700 active:scale-95' : 'bg-slate-50 text-slate-200 cursor-not-allowed opacity-50'}`}><Check className="w-4 h-4 stroke-[3]" /></button>
+                          <button onClick={() => handleAction(leave.id, 2)} disabled={leave.status !== 0} className={`p-2.5 rounded-xl transition-all shadow-lg ${leave.status === 0 ? 'bg-rose-600 text-white hover:bg-rose-700 active:scale-95' : 'bg-slate-50 text-slate-200 cursor-not-allowed opacity-50'}`}><X className="w-4 h-4 stroke-[3]" /></button>
                         </>
                       )}
-                      
-                      <button
-                        onClick={() => handleDelete(leave.id)}
-                        disabled={leave.status === 1}
-                        className={`p-2.5 rounded-xl transition-all shadow-lg ${
-                          leave.status !== 1 
-                            ? 'bg-slate-900 text-white hover:bg-black shadow-slate-900/20 active:scale-95' 
-                            : 'bg-slate-50 text-slate-200 shadow-none cursor-not-allowed opacity-50'
-                        }`}
-                        title={leave.status !== 1 ? "Delete Record" : "Approved records cannot be deleted"}
-                      >
-                        <Trash2 className="w-4 h-4 stroke-[3]" />
-                      </button>
+                      <button onClick={() => handleDelete(leave.id)} disabled={leave.status === 1} className={`p-2.5 rounded-xl transition-all shadow-lg ${leave.status !== 1 ? 'bg-slate-900 text-white hover:bg-black active:scale-95' : 'bg-slate-50 text-slate-200 cursor-not-allowed opacity-50'}`}><Trash2 className="w-4 h-4 stroke-[3]" /></button>
                     </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile/Tablet Card View */}
+        <div className="lg:hidden divide-y divide-slate-100">
+            {isLoading ? (
+                <div className="p-10 text-center text-slate-400 text-xs font-black uppercase tracking-[0.2em]">Syncing...</div>
+            ) : leaves?.length === 0 ? (
+                <div className="p-10 text-center text-slate-400 text-xs font-black uppercase tracking-[0.2em]">Null Output</div>
+            ) : leaves?.filter((l: any) => l.employeeName.toLowerCase().includes(searchTerm.toLowerCase()) || l.reason.toLowerCase().includes(searchTerm.toLowerCase())).map((leave: any) => (
+                <div key={leave.id} className="p-6 space-y-6 hover:bg-slate-50 transition-colors">
+                    <div className="flex items-start justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="w-11 h-11 bg-slate-100 rounded-2xl flex items-center justify-center text-slate-500 font-black text-sm border border-slate-200 uppercase">
+                                {leave.employeeName.charAt(0)}
+                            </div>
+                            <div>
+                                <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">{leave.employeeName}</h3>
+                                <div className="flex items-center gap-2 mt-0.5">
+                                    <span className={`text-[9px] font-black uppercase tracking-widest ${leave.annualLeaveBalance <= 0 ? 'text-red-500' : 'text-blue-500'}`}>
+                                        Bal: {leave.annualLeaveBalance} Days
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                          leave.status === 0 ? 'bg-amber-500 text-white' :
+                          leave.status === 1 ? 'bg-emerald-600 text-white' :
+                          'bg-rose-600 text-white'
+                        }`}>
+                          {leave.status === 0 ? 'Pending' : leave.status === 1 ? 'Approved' : 'Rejected'}
+                        </span>
+                    </div>
+
+                    <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-3">
+                        <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-slate-400">
+                            <span>Period Duration</span>
+                            <span className="text-slate-900">{Math.ceil((new Date(leave.endDate).getTime() - new Date(leave.startDate).getTime()) / (1000 * 3600 * 24)) + 1} Day(s)</span>
+                        </div>
+                        <p className="text-xs font-medium text-slate-600 leading-relaxed italic">"{leave.reason}"</p>
+                        <p className="text-[10px] font-bold text-slate-800">
+                            {new Date(leave.startDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' })} — {new Date(leave.endDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}
+                        </p>
+                    </div>
+
+                    <div className="flex items-center justify-end gap-3 pt-2">
+                        {isManagerOrAdmin && (
+                            <>
+                                <button onClick={() => handleAction(leave.id, 1)} disabled={leave.status !== 0} className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all ${leave.status === 0 ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/20' : 'bg-slate-100 text-slate-300'}`}>Approve</button>
+                                <button onClick={() => handleAction(leave.id, 2)} disabled={leave.status !== 0} className={`flex-1 py-3 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] transition-all ${leave.status === 0 ? 'bg-rose-600 text-white shadow-lg shadow-rose-600/20' : 'bg-slate-100 text-slate-300'}`}>Reject</button>
+                            </>
+                        )}
+                        <button onClick={() => handleDelete(leave.id)} disabled={leave.status === 1} className={`p-3 rounded-xl transition-all ${leave.status !== 1 ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-300'}`}><Trash2 className="w-4 h-4" /></button>
+                    </div>
+                </div>
+            ))}
         </div>
 
         <div className="px-8 py-6 bg-slate-50/30 border-t border-slate-100 flex items-center justify-between">

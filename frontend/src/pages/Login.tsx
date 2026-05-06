@@ -33,15 +33,15 @@ const Login: React.FC = () => {
   return (
     <div className="min-h-screen w-full flex flex-col bg-slate-50 font-['Inter']">
       {/* Dark Header */}
-      <header className="h-16 bg-[#0b1120] flex items-center justify-between px-8 shrink-0 shadow-lg relative z-20">
+      <header className="h-16 bg-[#0b1120] flex items-center justify-between px-4 sm:px-8 shrink-0 shadow-lg relative z-20">
         <div className="flex items-center gap-2 text-cyan-400">
-          <Cpu className="w-6 h-6" />
-          <span className="text-xl font-black tracking-tight text-white uppercase italic">
+          <Cpu className="w-5 h-5 sm:w-6 sm:h-6" />
+          <span className="text-lg sm:text-xl font-black tracking-tight text-white uppercase italic">
             HR-Pay <span className="text-cyan-400">Nexus</span>
           </span>
         </div>
-        <button className="px-6 py-1.5 border border-cyan-400/50 text-cyan-400 text-xs font-bold rounded-md hover:bg-cyan-400 hover:text-slate-900 transition-all uppercase tracking-widest">
-          Login Portal
+        <button className="px-4 sm:px-6 py-1.5 border border-cyan-400/50 text-cyan-400 text-[10px] sm:text-xs font-bold rounded-md hover:bg-cyan-400 hover:text-slate-900 transition-all uppercase tracking-widest">
+          Login
         </button>
       </header>
 
@@ -49,20 +49,20 @@ const Login: React.FC = () => {
       <main className="flex-1 flex flex-col items-center justify-center p-6 relative">
         <div className="w-full max-w-[480px] bg-white rounded-lg shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden border border-slate-100">
           {/* Card Top: Dark Section */}
-          <div className="bg-[#1e293b] p-10 flex flex-col items-center justify-center text-center space-y-4">
-            <div className="w-16 h-16 bg-[#1e293b] border-2 border-cyan-400 rounded-lg flex items-center justify-center text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-              <Shield className="w-8 h-8 fill-cyan-400/10" />
+          <div className="bg-[#1e293b] p-8 sm:p-10 flex flex-col items-center justify-center text-center space-y-4">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-[#1e293b] border-2 border-cyan-400 rounded-lg flex items-center justify-center text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+              <Shield className="w-6 h-6 sm:w-8 sm:h-8 fill-cyan-400/10" />
             </div>
-            <h1 className="text-3xl font-black text-white tracking-tight">HRPay Nexus</h1>
+            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">HRPay Nexus</h1>
           </div>
 
           {/* Card Separator: Cyan Line */}
           <div className="h-2 bg-cyan-400 shadow-[0_4px_10px_rgba(34,211,238,0.3)]"></div>
 
           {/* Card Bottom: Form Section */}
-          <div className="p-10 pt-12">
-            <div className="text-center mb-8">
-              <h2 className="text-lg font-bold text-slate-500 uppercase tracking-[0.2em]">Authentication Portal</h2>
+          <div className="p-6 sm:p-10 sm:pt-12">
+            <div className="text-center mb-6 sm:mb-8">
+              <h2 className="text-sm sm:text-lg font-bold text-slate-500 uppercase tracking-[0.2em]">Authentication Portal</h2>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
