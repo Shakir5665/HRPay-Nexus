@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center"> 
   <img src="https://i.imgur.com/J3yU7P9.png" alt="HRPay Nexus Logo" width="120" />
   <h1>HRPay Nexus 🚀</h1>
   <p><strong>Next-Generation Enterprise HR & Payroll Ecosystem</strong></p>
